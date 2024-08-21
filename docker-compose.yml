@@ -1,0 +1,60 @@
+version: "3.1"
+services:
+  car-mysql:
+    build:
+      context: .
+      dockerfile: docker/database/Dockerfile
+    container_name: car-mysql
+    volumes:
+      - ./docker/database/seeder.sql:/application/seeder.sql
+    environment:
+        MYSQL_ROOT_PASSWORD: car-api
+        MYSQL_DATABASE: car-api
+        MYSQL_USER: car-api
+        MYSQL_PASSWORD: car-api
+    ports:
+      - "3306:3306"
+    networks:
+      - default
+  car-api-php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: car-api-php
+    restart: unless-stopped
+    tty: true
+    environment:
+      - DATABASE_URL=mysql://car:car@car-mysql:5432/car
+      - PORT=8080
+    volumes:
+      - ./:/var/www/api
+    depends_on:
+      - car-mysql
+    ports:
+      - "9000:9000"
+    links:
+      - car-mysql
+    networks:
+      - default
+  car-nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: car-nginx
+    volumes:
+      - ./:/var/www/api
+    ports:
+      - "80:80"
+    depends_on:
+      - car-api-php
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.2.0/24
+volumes:
+  dbdata:
+    driver: local
