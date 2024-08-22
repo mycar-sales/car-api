@@ -1,16 +1,19 @@
 <?php
 declare(strict_types=1);
 
-use PHPUnit\Framework\TestCase;
-use App\Core\Domain\ValueObjects\VehicleColor;
+namespace Tests\Unit\Core\Domain\ValueObjects;
 
-final class VehicleColorTest extends TestCase
+use PHPUnit\Framework\TestCase;
+use App\Core\Domain\ValueObjects\VeiculoModelo;
+use InvalidArgumentException;
+
+final class VeiculoModeloTest extends TestCase
 {
     public function testCanBeCreatedFromValidString(): void
     {
         $this->assertInstanceOf(
-            VehicleColor::class,
-            new VehicleColor('Red')
+            VeiculoModelo::class,
+            new VeiculoModelo('Corolla')
         );
     }
 
@@ -18,28 +21,28 @@ final class VehicleColorTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new VehicleColor('');
+        new VeiculoModelo('');
     }
 
     public function testCanBeUsedAsString(): void
     {
         $this->assertEquals(
-            'Red',
-            (new VehicleColor('Red'))->getValue()
+            'Corolla',
+            (new VeiculoModelo('Corolla'))->getValue()
         );
     }
 
     public function testCannotBeUsedAsString(): void
     {
         $this->assertNotEquals(
-            'Red',
-            (new VehicleColor('Blue'))->getValue()
+            'Corolla',
+            (new VeiculoModelo('Camry'))->getValue()
         );
     }
 
     public function testToString(): void
     {
-        $vehiclePrice = new VehicleColor('Red');
-        $this->assertEquals('Red', $vehiclePrice->__toString());
+        $vehiclePreco = new VeiculoModelo(   'Corolla');
+        $this->assertEquals('Corolla', $vehiclePreco->__toString());
     }
 }

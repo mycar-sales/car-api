@@ -5,14 +5,14 @@ namespace App\Core\Domain\ValueObjects;
 
 use InvalidArgumentException;
 
-class VehicleColor
+class VeiculoCor
 {
     private string $value;
 
     public function __construct(string $value)
     {
         if (empty($value)) {
-            throw new InvalidArgumentException("Vehicle color cannot be empty");
+            throw new InvalidArgumentException("Veiculo cor cannot be empty");
         }
 
         $this->value = $value;

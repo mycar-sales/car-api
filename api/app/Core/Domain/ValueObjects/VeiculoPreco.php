@@ -5,14 +5,14 @@ namespace App\Core\Domain\ValueObjects;
 
 use InvalidArgumentException;
 
-class VehiclePrice
+class VeiculoPreco
 {
     private float $value;
 
     public function __construct(float $value)
     {
         if ($value <= 0) {
-            throw new InvalidArgumentException("Vehicle price must be greater than zero");
+            throw new InvalidArgumentException("Veiculo preco must be greater than zero");
         }
 
         $this->value = $value;
