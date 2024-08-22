@@ -14,6 +14,13 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+# Instalação do PHPUnit e Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Definições de ambiente
+ENV XDEBUG_MODE coverage
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 COPY ./api/* /var/www/api
