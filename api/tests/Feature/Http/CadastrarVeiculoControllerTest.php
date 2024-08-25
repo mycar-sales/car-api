@@ -49,7 +49,8 @@ final class CadastrarVeiculoControllerTest extends TestCase
             'modelo' => 'Corolla',
             'ano' => 2022,
             'cor' => 'Red',
-            'preco' => 10000.00
+            'preco' => 10000.00,
+            'placa' => 'ABC-1234'
         ];
 
         $this->cadastrarVeiculoUseCase->shouldReceive('execute')->once();
@@ -71,7 +72,8 @@ final class CadastrarVeiculoControllerTest extends TestCase
             'modelo' => 'Corolla',
             'ano' => 2022,
             'cor' => 'Red',
-            'preco' => 10000.00
+            'preco' => 10000.00,
+            'placa' => 'ABC-1234'
         ];
 
         $this->cadastrarVeiculoUseCase->shouldReceive('execute')->once()
@@ -94,7 +96,8 @@ final class CadastrarVeiculoControllerTest extends TestCase
             'modelo' => 'Corolla',
             'ano' => 2022,
             'cor' => 'Red',
-            'preco' => 10000.00
+            'preco' => 10000.00,
+            'placa' => 'ABC-1234'
         ];
 
         $this->cadastrarVeiculoUseCase->shouldReceive('execute')->once()->andThrow(new \Exception());

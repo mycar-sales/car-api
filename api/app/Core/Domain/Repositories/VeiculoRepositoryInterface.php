@@ -17,6 +17,12 @@ interface VeiculoRepositoryInterface
     public function save(Veiculo $veiculo): void;
 
     /**
+     * @param Veiculo $veiculo
+     * @return void
+     */
+    public function update(Veiculo $veiculo): void;
+
+    /**
      * @param int $id
      * @return Veiculo|null
      */

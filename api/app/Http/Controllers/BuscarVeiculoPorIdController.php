@@ -78,7 +78,7 @@ class BuscarVeiculoPorIdController extends Controller
                 throw new NotFoundHttpException('Veículo não encontrado');
             }
 
-            return response()->json($veiculo);
+            return response()->json($veiculo->toArray());
         } catch (NotFoundHttpException $e) {
             return response()->json(['message' => $e->getMessage()], 404);
         } catch (Exception $e) {

@@ -38,7 +38,8 @@ final class VeiculoRepositoryTest extends TestCase
             new VeiculoModelo('Corolla'),
             2022,
             new VeiculoCor('Red'),
-            new VeiculoPreco(10000.00)
+            new VeiculoPreco(10000.00),
+            'ABC-1234'
         );
 
         $this->veiculoRepository->save($veiculo);
@@ -53,7 +54,9 @@ final class VeiculoRepositoryTest extends TestCase
             'modelo' => 'Corolla',
             'ano' => 2022,
             'cor' => 'Red',
-            'preco' => 10000.00
+            'preco' => 10000.00,
+            'placa' => 'ABC-1234',
+            'disponivel' => true
         ];
 
         DB::shouldReceive('table')
@@ -120,7 +123,8 @@ final class VeiculoRepositoryTest extends TestCase
             new VeiculoModelo('Corolla'),
             2022,
             new VeiculoCor('Red'),
-            new VeiculoPreco(10000.00)
+            new VeiculoPreco(10000.00),
+            'ABC-1234'
         );
 
         $this->veiculoRepository->save($veiculo);
@@ -135,7 +139,9 @@ final class VeiculoRepositoryTest extends TestCase
             'modelo' => 'Corolla',
             'ano' => 2022,
             'cor' => 'Red',
-            'preco' => 10000.00
+            'preco' => 10000.00,
+            'placa' => 'ABC-1234',
+            'disponivel' => true
         ];
 
         DB::shouldReceive('table')
@@ -168,14 +174,16 @@ final class VeiculoRepositoryTest extends TestCase
                 'modelo' => 'Corolla',
                 'ano' => 2022,
                 'cor' => 'Red',
-                'preco' => 10000.00
+                'preco' => 10000.00,
+                'placa' => 'ABC-1234'
             ],
             (object) [
                 'marca' => 'Ford',
                 'modelo' => 'Fiesta',
                 'ano' => 2021,
                 'cor' => 'Blue',
-                'preco' => 9000.00
+                'preco' => 9000.00,
+                'placa' => 'DEF-5678',
             ]
         ];
 
@@ -186,6 +194,9 @@ final class VeiculoRepositoryTest extends TestCase
             ->shouldReceive('where')
             ->once()
             ->with('disponivel', true)
+            ->andReturnSelf()
+            ->shouldReceive('orderBy')
+            ->once()
             ->andReturnSelf()
             ->shouldReceive('get')
             ->once()
@@ -209,14 +220,16 @@ final class VeiculoRepositoryTest extends TestCase
                 'modelo' => 'Corolla',
                 'ano' => 2022,
                 'cor' => 'Red',
-                'preco' => 10000.00
+                'preco' => 10000.00,
+                'placa' => 'ABC-1234'
             ],
             (object) [
                 'marca' => 'Ford',
                 'modelo' => 'Fiesta',
                 'ano' => 2021,
                 'cor' => 'Blue',
-                'preco' => 9000.00
+                'preco' => 9000.00,
+                'placa' => 'DEF-5678',
             ]
         ];
 
@@ -226,7 +239,10 @@ final class VeiculoRepositoryTest extends TestCase
             ->andReturnSelf()
             ->shouldReceive('where')
             ->once()
+            ->andReturnSelf()
             ->with('disponivel', false)
+            ->shouldReceive('orderBy')
+            ->once()
             ->andReturnSelf()
             ->shouldReceive('get')
             ->once()
@@ -240,5 +256,63 @@ final class VeiculoRepositoryTest extends TestCase
         $this->assertCount(2, $veiculos);
         $this->assertInstanceOf(Veiculo::class, $veiculos[0]);
         $this->assertInstanceOf(Veiculo::class, $veiculos[1]);
+    }
+
+    public function testVeiculoCanBeUpdated(): void
+    {
+        $veiculo = new Veiculo(
+            new VeiculoMarca('Toyota'),
+            new VeiculoModelo('Corolla'),
+            2022,
+            new VeiculoCor('Red'),
+            new VeiculoPreco(10000.00),
+            'ABC-1234',
+            true
+        );
+
+        DB::shouldReceive('table')
+            ->once()
+            ->with('veiculos')
+            ->andReturnSelf();
+
+        DB::shouldReceive('where')
+            ->once()
+            ->with('id', $veiculo->getId())
+            ->andReturnSelf();
+
+        DB::shouldReceive('update')
+            ->once()
+            ->andReturn(1);
+
+        $this->veiculoRepository->update($veiculo);
+    }
+
+    public function testVeiculoUpdateFailsWhenNoMatchingId(): void
+    {
+        $veiculo = new Veiculo(
+            new VeiculoMarca('Toyota'),
+            new VeiculoModelo('Corolla'),
+            2022,
+            new VeiculoCor('Red'),
+            new VeiculoPreco(10000.00),
+            'ABC-1234',
+            true
+        );
+
+        DB::shouldReceive('table')
+            ->once()
+            ->with('veiculos')
+            ->andReturnSelf();
+
+        DB::shouldReceive('where')
+            ->once()
+            ->with('id', $veiculo->getId())
+            ->andReturnSelf();
+
+        DB::shouldReceive('update')
+            ->once()
+            ->andReturn(0);
+
+        $this->veiculoRepository->update($veiculo);
     }
 }

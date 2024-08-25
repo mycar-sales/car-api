@@ -9,12 +9,14 @@ use App\Core\Domain\Repositories\VeiculoRepositoryInterface;
  * Class BuscarTodosVeiculosDisponiveisUseCase
  * @package App\Core\Domain\UseCases
  */
-class BuscarTodosVeiculosDisponiveisUseCase
+class BuscarTodosVeiculosDisponiveisUseCase extends BaseUseCase
 {
     /**
      * @var VeiculoRepositoryInterface
      */
     private VeiculoRepositoryInterface $veiculoRepository;
+
+
 
     /**
      * @param VeiculoRepositoryInterface $veiculoRepositorio
@@ -25,11 +27,13 @@ class BuscarTodosVeiculosDisponiveisUseCase
     }
 
     /**
-     * @return array
+     * Executa o caso de uso e carrega os veículos disponíveis.
+     *
+     * @return self
      */
-    public function executar(): array
+    public function executar(): self
     {
-        return $this->veiculoRepository->findAllAvailable();
+        $this->veiculos = $this->veiculoRepository->findAllAvailable();
+        return $this;
     }
 }
-

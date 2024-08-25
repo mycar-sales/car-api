@@ -53,7 +53,8 @@ final class BuscarVeiculoPorIdControllerTest extends TestCase
                     new VeiculoModelo('Fiesta'),
                     2021,
                     new VeiculoCor('Blue'),
-                    new VeiculoPreco(9000.00)
+                    new VeiculoPreco(9000.00),
+                    'ABC-1234'
                 )
             );
 

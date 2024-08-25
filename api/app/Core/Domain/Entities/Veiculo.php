@@ -12,8 +12,10 @@ use App\Core\Domain\ValueObjects\VeiculoPreco;
  * Class Veiculo
  * @package App\Core\Domain\Entities
  */
-class Veiculo
+class Veiculo extends BaseEntity
 {
+    
+    private $id;
     /**
      * @var VeiculoMarca
      */
@@ -35,19 +37,27 @@ class Veiculo
      */
     private VeiculoPreco $preco;
 
+    private $placa;
+
+    private $disponivel;
+
     /**
      * @param VeiculoMarca $marca
      * @param VeiculoModelo $modelo
      * @param int $ano
      * @param VeiculoCor $cor
      * @param VeiculoPreco $preco
+     * @param $placa
+     * @param bool $disponivel
      */
     public function __construct(
         VeiculoMarca  $marca,
         VeiculoModelo $modelo,
         int           $ano,
         VeiculoCor    $cor,
-        VeiculoPreco  $preco
+        VeiculoPreco  $preco,
+        $placa,
+        bool $disponivel = true
     )
     {
         $this->marca = $marca;
@@ -55,6 +65,8 @@ class Veiculo
         $this->ano = $ano;
         $this->cor = $cor;
         $this->preco = $preco;
+        $this->placa = $placa;
+        $this->disponivel = $disponivel;
     }
 
     /**
@@ -135,5 +147,47 @@ class Veiculo
     public function setPreco(VeiculoPreco $preco): void
     {
         $this->preco = $preco;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlaca()
+    {
+        return $this->placa;
+    }
+    
+    public function isDisponivel(): bool
+    {
+        return $this->disponivel;
+    }
+    
+    /**
+     * @param mixed $placa
+     */
+    public function setPlaca($placa): void
+    {
+        $this->placa = $placa;
+    }
+
+    public function setDisponivel(bool $disponivel): void
+    {
+        $this->disponivel = $disponivel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 }

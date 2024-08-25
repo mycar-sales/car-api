@@ -40,7 +40,8 @@ class CadastrarVeiculoUseCase
             new VeiculoModelo($data['modelo']),
             $data['ano'],
             new VeiculoCor($data['cor']),
-            new VeiculoPreco($data['preco'])
+            new VeiculoPreco($data['preco']),
+            $data['placa']
         );
         $this->veiculoRepository->save($veiculo);
     }

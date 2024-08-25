@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CadastrarVeiculoController;
+use App\Http\Controllers\UpdateVeiculoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,6 @@ Route::prefix('v1')->group(function () {
     Route::get('/veiculos/disponiveis', BuscarTodosVeiculosDisponiveisController::class);
     Route::get('/veiculos/vendidos', BuscarTodosVeiculosVendidosController::class);
     Route::get('/veiculos/{id}', BuscarVeiculoPorIdController::class);
+    Route::put('/v1/veiculos/{id}', UpdateVeiculoController::class);
 });
 

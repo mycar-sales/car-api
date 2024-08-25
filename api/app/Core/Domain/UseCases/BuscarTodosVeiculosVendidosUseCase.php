@@ -9,7 +9,7 @@ use App\Core\Domain\Repositories\VeiculoRepositoryInterface;
  * Class BuscarTodosVeiculosVendidosUseCase
  * @package App\Core\Domain\UseCases
  */
-class BuscarTodosVeiculosVendidosUseCase
+class BuscarTodosVeiculosVendidosUseCase extends BaseUseCase
 {
     /**
      * @var VeiculoRepositoryInterface
@@ -25,11 +25,12 @@ class BuscarTodosVeiculosVendidosUseCase
     }
 
     /**
-     * @return array
+     * @return BuscarTodosVeiculosVendidosUseCase
      */
-    public function executar(): array
+    public function executar(): self
     {
-        return $this->veiculoRepositorio->findAllSold();
+        $this->veiculos = $this->veiculoRepositorio->findAllSold();
+        return $this;
     }
 }
 

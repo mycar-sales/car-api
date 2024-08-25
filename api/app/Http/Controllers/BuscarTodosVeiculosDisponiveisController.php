@@ -63,9 +63,10 @@ class BuscarTodosVeiculosDisponiveisController extends Controller
     {
         try {
             $veiculos = $this->buscarTodosVeiculosDisponiveisUseCase->executar();
-            return response()->json($veiculos->toArray(), 200);
+
+            return response()->json($veiculos->toArray());
         } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
+            return response()->json(['message' =>  'Erro interno do servidor'], 500);
         }
     }
 }

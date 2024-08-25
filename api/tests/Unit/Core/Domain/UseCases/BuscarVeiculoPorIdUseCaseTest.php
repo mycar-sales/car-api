@@ -33,7 +33,8 @@ final class BuscarVeiculoPorIdUseCaseTest extends TestCase
             new VeiculoModelo('Corolla'),
             2022,
             new VeiculoCor('Red'),
-            new VeiculoPreco(10000.00)
+            new VeiculoPreco(10000.00),
+            'ABC-1234'
         );
 
         $this->veiculoRepository->shouldReceive('findById')->once()->andReturn($veiculo);

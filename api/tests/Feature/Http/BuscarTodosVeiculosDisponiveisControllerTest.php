@@ -19,7 +19,7 @@ final class BuscarTodosVeiculosDisponiveisControllerTest extends TestCase
     /**
      * @var BuscarTodosVeiculosDisponiveisUseCase&Mockery\MockInterface&Mockery\LegacyMockInterface&Mockery\LegacyMockInterface
      */
-    private $buscarTodosVeiculosDisponiveisUseCase;
+    private BuscarTodosVeiculosDisponiveisUseCase $buscarTodosVeiculosDisponiveisUseCase;
     /**
      * @var BuscarTodosVeiculosDisponiveisController
      */
@@ -44,7 +44,8 @@ final class BuscarTodosVeiculosDisponiveisControllerTest extends TestCase
     public function testAllAvailableVehiclesCanBeFound(): void
     {
         $this->buscarTodosVeiculosDisponiveisUseCase->shouldReceive('executar')
-            ->once()->andReturn([]);
+            ->once()->andReturn($this->buscarTodosVeiculosDisponiveisUseCase)
+            ->shouldReceive('toArray')->once()->andReturn([]);
 
         $response = $this->buscarTodosVeiculosDisponiveisController->__invoke();
 

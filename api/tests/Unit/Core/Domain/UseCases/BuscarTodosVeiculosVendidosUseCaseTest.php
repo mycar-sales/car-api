@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Unit\Core\Domain\UseCases;
@@ -34,31 +35,32 @@ final class BuscarTodosVeiculosVendidosUseCaseTest extends TestCase
                 new VeiculoModelo('Corolla'),
                 2022,
                 new VeiculoCor('Red'),
-                new VeiculoPreco(10000.00)
+                new VeiculoPreco(10000.00),
+                'ABC-1234'
             ),
             new Veiculo(
                 new VeiculoMarca('Ford'),
                 new VeiculoModelo('Fiesta'),
                 2021,
                 new VeiculoCor('Blue'),
-                new VeiculoPreco(9000.00)
+                new VeiculoPreco(9000.00),
+                'DEF-5678'
             )
         ];
 
         $this->veiculoRepository->shouldReceive('findAllSold')->once()->andReturn($veiculos);
 
-        $result = $this->buscarTodosVeiculosVendidosUseCase->executar();
-
+        $result = $this->buscarTodosVeiculosVendidosUseCase->executar()->toArray();
         $this->assertCount(2, $result);
-        $this->assertInstanceOf(Veiculo::class, $result[0]);
-        $this->assertInstanceOf(Veiculo::class, $result[1]);
+        $this->assertIsArray($result[0]);
+        $this->assertIsArray($result[1]);
     }
 
     public function testNoSoldVehiclesCanBeFound(): void
     {
         $this->veiculoRepository->shouldReceive('findAllSold')->once()->andReturn([]);
 
-        $result = $this->buscarTodosVeiculosVendidosUseCase->executar();
+        $result = $this->buscarTodosVeiculosVendidosUseCase->executar()->toArray();
 
         $this->assertCount(0, $result);
     }

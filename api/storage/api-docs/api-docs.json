@@ -282,6 +282,10 @@
                                         "type": "number",
                                         "format": "float",
                                         "example": 10000
+                                    },
+                                    "placa": {
+                                        "type": "string",
+                                        "example": "ABC-1234"
                                     }
                                 },
                                 "type": "object"
@@ -315,6 +319,142 @@
                                         "message": {
                                             "type": "string",
                                             "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/veiculos/{id}": {
+            "put": {
+                "tags": [
+                    "Veículos"
+                ],
+                "summary": "Atualizar veículo",
+                "description": "Atualiza as informações de um veículo existente.",
+                "operationId": "5d924e728d85deba14e52471d30c1cbb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do veículo a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "marca",
+                                    "modelo",
+                                    "ano",
+                                    "cor",
+                                    "preco",
+                                    "placa"
+                                ],
+                                "properties": {
+                                    "marca": {
+                                        "type": "string",
+                                        "example": "Toyota"
+                                    },
+                                    "modelo": {
+                                        "type": "string",
+                                        "example": "Corolla"
+                                    },
+                                    "ano": {
+                                        "type": "integer",
+                                        "example": 2022
+                                    },
+                                    "cor": {
+                                        "type": "string",
+                                        "example": "Prata"
+                                    },
+                                    "preco": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10000
+                                    },
+                                    "placa": {
+                                        "type": "string",
+                                        "example": "XYZ-1234"
+                                    },
+                                    "disponivel": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Veículo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Veículo atualizado com sucesso"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de validação dos dados fornecidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro de validação"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Veículo não encontrado"
                                         }
                                     },
                                     "type": "object"

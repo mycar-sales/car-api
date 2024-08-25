@@ -45,7 +45,8 @@ final class CadastrarVeiculoUseCaseTest extends TestCase
             'modelo' => 'Corolla',
             'ano' => 2022,
             'cor' => 'Red',
-            'preco' => 10000.00
+            'preco' => 10000.00,
+            'placa' => 'ABC-1234',
         ];
 
         $this->veiculoRepository->shouldReceive('save')->once();

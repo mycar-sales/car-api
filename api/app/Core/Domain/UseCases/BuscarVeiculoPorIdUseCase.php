@@ -10,7 +10,7 @@ use App\Core\Domain\Repositories\VeiculoRepositoryInterface;
  * Class BuscarVeiculoPorIdUseCase
  * @package App\Core\Application\UseCases
  */
-class BuscarVeiculoPorIdUseCase
+class BuscarVeiculoPorIdUseCase extends BaseUseCase
 {
     /**
      * @var VeiculoRepositoryInterface

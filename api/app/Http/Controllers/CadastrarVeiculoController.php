@@ -42,7 +42,8 @@ class CadastrarVeiculoController extends Controller
      *             @OA\Property(property="modelo", type="string", example="Corolla"),
      *             @OA\Property(property="ano", type="integer", example=2022),
      *             @OA\Property(property="cor", type="string", example="Red"),
-     *             @OA\Property(property="preco", type="number", format="float", example=10000.00)
+     *             @OA\Property(property="preco", type="number", format="float", example=10000.00),
+     *             @OA\Property(property="placa", type="string", example="ABC-1234")
      *         )
      *     ),
      *     @OA\Response(
@@ -72,6 +73,7 @@ class CadastrarVeiculoController extends Controller
      */
     public function __invoke(Request $request): JsonResponse
     {
+
         try {
             $data = $request->validate([
                 'marca' => 'required|string|max:255',
@@ -79,6 +81,7 @@ class CadastrarVeiculoController extends Controller
                 'ano' => 'required|integer|min:1900|max:' . date('Y'),
                 'cor' => 'required|string|max:255',
                 'preco' => 'required|numeric|min:0',
+                'placa' => 'required|string|max:8',
             ]);
 
             $this->cadastrarVeiculoUseCase->execute($data);
@@ -87,7 +90,7 @@ class CadastrarVeiculoController extends Controller
         } catch (BadRequestHttpException $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         } catch (Exception $e) {
-            return response()->json(['message' => 'Erro interno do servidor'], 500);
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }
 }

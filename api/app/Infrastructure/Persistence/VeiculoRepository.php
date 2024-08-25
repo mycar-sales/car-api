@@ -21,9 +21,25 @@ class VeiculoRepository implements VeiculoRepositoryInterface
             'ano' => $veiculo->getAno(),
             'cor' => $veiculo->getCor()->getValue(),
             'preco' => $veiculo->getPreco()->getValue(),
+            'placa' => $veiculo->getPlaca(),
         ]);
     }
 
+    public function update(Veiculo $veiculo): void
+    {
+        DB::table('veiculos')
+            ->where('id', $veiculo->getId())
+            ->update([
+                'marca' => $veiculo->getMarca()->getValue(),
+                'modelo' => $veiculo->getModelo()->getValue(),
+                'ano' => $veiculo->getAno(),
+                'cor' => $veiculo->getCor()->getValue(),
+                'preco' => $veiculo->getPreco()->getValue(),
+                'placa' => $veiculo->getPlaca(),
+                'disponivel' => $veiculo->isDisponivel(),
+            ]);
+    }
+    
     public function findById(int $id): ?Veiculo
     {
         $veiculo = DB::table('veiculos')->where('id', $id)->first();
@@ -37,13 +53,18 @@ class VeiculoRepository implements VeiculoRepositoryInterface
             new VeiculoModelo($veiculo->modelo),
             $veiculo->ano,
             new VeiculoCor($veiculo->cor),
-            new VeiculoPreco($veiculo->preco)
+            new VeiculoPreco((float) $veiculo->preco),
+            $veiculo->placa,
+            (bool) $veiculo->disponivel
         );
     }
 
     public function findAllAvailable(): array
     {
-        $veiculos = DB::table('veiculos')->where('disponivel', true)->get()->toArray();
+        $veiculos = DB::table('veiculos')
+            ->where('disponivel', true)
+            ->orderBy('preco')
+            ->get()->toArray();
 
         return array_map(function ($veiculo) {
             return new Veiculo(
@@ -51,14 +72,18 @@ class VeiculoRepository implements VeiculoRepositoryInterface
                 new VeiculoModelo($veiculo->modelo),
                 $veiculo->ano,
                 new VeiculoCor($veiculo->cor),
-                new VeiculoPreco($veiculo->preco)
+                new VeiculoPreco((float) $veiculo->preco),
+                $veiculo->placa,
             );
         }, $veiculos);
     }
 
     public function findAllSold(): array
     {
-        $veiculos = DB::table('veiculos')->where('disponivel', false)->get()->toArray();
+        $veiculos = DB::table('veiculos')
+            ->where('disponivel', false)
+            ->orderBy('preco')
+            ->get()->toArray();
 
         return array_map(function ($veiculo) {
             return new Veiculo(
@@ -66,7 +91,8 @@ class VeiculoRepository implements VeiculoRepositoryInterface
                 new VeiculoModelo($veiculo->modelo),
                 $veiculo->ano,
                 new VeiculoCor($veiculo->cor),
-                new VeiculoPreco($veiculo->preco)
+                new VeiculoPreco((float) $veiculo->preco),
+                $veiculo->placa,
             );
         }, $veiculos);
     }

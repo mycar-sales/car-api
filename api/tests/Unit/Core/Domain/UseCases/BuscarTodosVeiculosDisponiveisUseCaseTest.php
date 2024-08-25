@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Unit\Core\Domain\UseCases;
@@ -23,7 +24,8 @@ final class BuscarTodosVeiculosDisponiveisUseCaseTest extends TestCase
         parent::setUp();
 
         $this->veiculoRepository = Mockery::mock(VeiculoRepositoryInterface::class);
-        $this->buscarTodosVeiculosDisponiveisUseCase = new BuscarTodosVeiculosDisponiveisUseCase($this->veiculoRepository);
+        $this->buscarTodosVeiculosDisponiveisUseCase = new
+        BuscarTodosVeiculosDisponiveisUseCase($this->veiculoRepository);
     }
 
     public function testAllAvailableVehiclesCanBeFound(): void
@@ -34,31 +36,33 @@ final class BuscarTodosVeiculosDisponiveisUseCaseTest extends TestCase
                 new VeiculoModelo('Corolla'),
                 2022,
                 new VeiculoCor('Red'),
-                new VeiculoPreco(10000.00)
+                new VeiculoPreco(10000.00),
+                'ABC-1234'
             ),
             new Veiculo(
                 new VeiculoMarca('Ford'),
                 new VeiculoModelo('Fiesta'),
                 2021,
                 new VeiculoCor('Blue'),
-                new VeiculoPreco(9000.00)
+                new VeiculoPreco(9000.00),
+                'ABC-1234'
             )
         ];
 
         $this->veiculoRepository->shouldReceive('findAllAvailable')->once()->andReturn($veiculos);
 
-        $result = $this->buscarTodosVeiculosDisponiveisUseCase->executar();
+        $result = $this->buscarTodosVeiculosDisponiveisUseCase->executar()->toArray();
 
         $this->assertCount(2, $result);
-        $this->assertInstanceOf(Veiculo::class, $result[0]);
-        $this->assertInstanceOf(Veiculo::class, $result[1]);
+        $this->assertIsArray($result[0]);
+        $this->assertIsArray($result[1]);
     }
 
     public function testNoAvailableVehiclesCanBeFound(): void
     {
         $this->veiculoRepository->shouldReceive('findAllAvailable')->once()->andReturn([]);
 
-        $result = $this->buscarTodosVeiculosDisponiveisUseCase->executar();
+        $result = $this->buscarTodosVeiculosDisponiveisUseCase->executar()->toArray();
 
         $this->assertCount(0, $result);
     }

@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\Core\Domain\ValueObjects;
 
+use App\Core\Domain\Entities\BaseEntity;
 use InvalidArgumentException;
 
-class VeiculoCor
+class VeiculoCor extends BaseEntity
 {
     private string $value;
 
