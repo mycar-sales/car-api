@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Core\Domain\Entities;
@@ -14,7 +15,6 @@ use App\Core\Domain\ValueObjects\VeiculoPreco;
  */
 class Veiculo extends BaseEntity
 {
-    
     private $id;
     /**
      * @var VeiculoMarca
@@ -51,15 +51,14 @@ class Veiculo extends BaseEntity
      * @param bool $disponivel
      */
     public function __construct(
-        VeiculoMarca  $marca,
+        VeiculoMarca $marca,
         VeiculoModelo $modelo,
-        int           $ano,
-        VeiculoCor    $cor,
-        VeiculoPreco  $preco,
+        int $ano,
+        VeiculoCor $cor,
+        VeiculoPreco $preco,
         $placa,
         bool $disponivel = true
-    )
-    {
+    ) {
         $this->marca = $marca;
         $this->modelo = $modelo;
         $this->ano = $ano;
@@ -156,12 +155,12 @@ class Veiculo extends BaseEntity
     {
         return $this->placa;
     }
-    
+
     public function isDisponivel(): bool
     {
         return $this->disponivel;
     }
-    
+
     /**
      * @param mixed $placa
      */

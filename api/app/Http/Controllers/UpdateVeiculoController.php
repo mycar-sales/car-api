@@ -96,7 +96,8 @@ class UpdateVeiculoController extends Controller
     public function __invoke(int $id, Request $request): JsonResponse
     {
         try {
-            $data = $request->validate([
+            $data = $request->validate(
+                [
                 'marca' => 'required|string|max:255',
                 'modelo' => 'required|string|max:255',
                 'ano' => 'required|integer|min:1900|max:' . date('Y'),
@@ -104,7 +105,8 @@ class UpdateVeiculoController extends Controller
                 'preco' => 'required|numeric|min:0',
                 'placa' => 'required|string|max:10',
                 'disponivel' => 'nullable|boolean',
-            ]);
+                ]
+            );
 
             $this->updateVeiculoUseCase->executar($id, $data);
 
@@ -118,4 +120,3 @@ class UpdateVeiculoController extends Controller
         }
     }
 }
-

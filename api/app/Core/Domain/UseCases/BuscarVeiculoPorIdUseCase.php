@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Core\Domain\UseCases;
@@ -34,4 +35,3 @@ class BuscarVeiculoPorIdUseCase extends BaseUseCase
         return $this->veiculoRepository->findById($id);
     }
 }
-

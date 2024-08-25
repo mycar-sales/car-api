@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence;
@@ -15,21 +16,24 @@ class VeiculoRepository implements VeiculoRepositoryInterface
 {
     public function save(Veiculo $veiculo): void
     {
-        DB::table('veiculos')->insert([
+        DB::table('veiculos')->insert(
+            [
             'marca' => $veiculo->getMarca()->getValue(),
             'modelo' => $veiculo->getModelo()->getValue(),
             'ano' => $veiculo->getAno(),
             'cor' => $veiculo->getCor()->getValue(),
             'preco' => $veiculo->getPreco()->getValue(),
             'placa' => $veiculo->getPlaca(),
-        ]);
+            ]
+        );
     }
 
     public function update(Veiculo $veiculo): void
     {
         DB::table('veiculos')
             ->where('id', $veiculo->getId())
-            ->update([
+            ->update(
+                [
                 'marca' => $veiculo->getMarca()->getValue(),
                 'modelo' => $veiculo->getModelo()->getValue(),
                 'ano' => $veiculo->getAno(),
@@ -37,9 +41,10 @@ class VeiculoRepository implements VeiculoRepositoryInterface
                 'preco' => $veiculo->getPreco()->getValue(),
                 'placa' => $veiculo->getPlaca(),
                 'disponivel' => $veiculo->isDisponivel(),
-            ]);
+                ]
+            );
     }
-    
+
     public function findById(int $id): ?Veiculo
     {
         $veiculo = DB::table('veiculos')->where('id', $id)->first();
@@ -66,16 +71,19 @@ class VeiculoRepository implements VeiculoRepositoryInterface
             ->orderBy('preco')
             ->get()->toArray();
 
-        return array_map(function ($veiculo) {
-            return new Veiculo(
-                new VeiculoMarca($veiculo->marca),
-                new VeiculoModelo($veiculo->modelo),
-                $veiculo->ano,
-                new VeiculoCor($veiculo->cor),
-                new VeiculoPreco((float) $veiculo->preco),
-                $veiculo->placa,
-            );
-        }, $veiculos);
+        return array_map(
+            function ($veiculo) {
+                return new Veiculo(
+                    new VeiculoMarca($veiculo->marca),
+                    new VeiculoModelo($veiculo->modelo),
+                    $veiculo->ano,
+                    new VeiculoCor($veiculo->cor),
+                    new VeiculoPreco((float) $veiculo->preco),
+                    $veiculo->placa,
+                );
+            },
+            $veiculos
+        );
     }
 
     public function findAllSold(): array
@@ -85,15 +93,18 @@ class VeiculoRepository implements VeiculoRepositoryInterface
             ->orderBy('preco')
             ->get()->toArray();
 
-        return array_map(function ($veiculo) {
-            return new Veiculo(
-                new VeiculoMarca($veiculo->marca),
-                new VeiculoModelo($veiculo->modelo),
-                $veiculo->ano,
-                new VeiculoCor($veiculo->cor),
-                new VeiculoPreco((float) $veiculo->preco),
-                $veiculo->placa,
-            );
-        }, $veiculos);
+        return array_map(
+            function ($veiculo) {
+                return new Veiculo(
+                    new VeiculoMarca($veiculo->marca),
+                    new VeiculoModelo($veiculo->modelo),
+                    $veiculo->ano,
+                    new VeiculoCor($veiculo->cor),
+                    new VeiculoPreco((float) $veiculo->preco),
+                    $veiculo->placa,
+                );
+            },
+            $veiculos
+        );
     }
 }

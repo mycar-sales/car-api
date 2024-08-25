@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Core\Domain\UseCases;
@@ -19,8 +20,9 @@ abstract class BaseUseCase
      */
     public function toArray(): array
     {
-        return array_map(function ($veiculo) {
-            return [
+        return array_map(
+            function ($veiculo) {
+                return [
                 'marca' => $veiculo->getMarca()->getValue(),
                 'modelo' => $veiculo->getModelo()->getValue(),
                 'ano' => $veiculo->getAno(),
@@ -28,7 +30,9 @@ abstract class BaseUseCase
                 'preco' => $veiculo->getPreco()->getValue(),
                 'disponivel' => $veiculo->isDisponivel(),
                 'placa' => $veiculo->getPlaca()
-            ];
-        }, $this->veiculos);
+                ];
+            },
+            $this->veiculos
+        );
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -22,7 +23,8 @@ class CadastrarVeiculoController extends Controller
      */
     public function __construct(
         private CadastrarVeiculoUseCase $cadastrarVeiculoUseCase
-    ) {}
+    ) {
+    }
     /**
      * @OA\Post(
      *     path="/veiculos",
@@ -67,23 +69,28 @@ class CadastrarVeiculoController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            $data = $request->validate([
+            $data = $request->validate(
+                [
                 'marca' => 'required|string|max:255',
                 'modelo' => 'required|string|max:255',
                 'ano' => 'required|integer|min:1900|max:' . date('Y'),
                 'cor' => 'required|string|max:255',
                 'preco' => 'required|numeric|min:0',
                 'placa' => 'required|string|max:8',
-            ]);
+                ]
+            );
 
             $this->cadastrarVeiculoUseCase->execute($data);
 
             return response()->json(['message' => 'Veículo cadastrado com sucesso'], 201);
         } catch (BadRequestHttpException | Exception $e) {
-            return response()->json(['message' => $e->getMessage()], match (true) {
+            return response()->json(
+                ['message' => $e->getMessage()],
+                match (true) {
                 $e instanceof BadRequestHttpException => 400,
                 default => 500,
-            });
+                }
+            );
         }
     }
 }
