@@ -18,18 +18,11 @@ use Exception;
 class CadastrarVeiculoController extends Controller
 {
     /**
-     * @var CadastrarVeiculoUseCase
-     */
-    private CadastrarVeiculoUseCase $cadastrarVeiculoUseCase;
-
-    /**
      * @param CadastrarVeiculoUseCase $cadastrarVeiculoUseCase
      */
-    public function __construct(CadastrarVeiculoUseCase $cadastrarVeiculoUseCase)
-    {
-        $this->cadastrarVeiculoUseCase = $cadastrarVeiculoUseCase;
-    }
-
+    public function __construct(
+        private CadastrarVeiculoUseCase $cadastrarVeiculoUseCase
+    ) {}
     /**
      * @OA\Post(
      *     path="/veiculos",
@@ -73,7 +66,6 @@ class CadastrarVeiculoController extends Controller
      */
     public function __invoke(Request $request): JsonResponse
     {
-
         try {
             $data = $request->validate([
                 'marca' => 'required|string|max:255',
@@ -87,10 +79,11 @@ class CadastrarVeiculoController extends Controller
             $this->cadastrarVeiculoUseCase->execute($data);
 
             return response()->json(['message' => 'Veículo cadastrado com sucesso'], 201);
-        } catch (BadRequestHttpException $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
-        } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
+        } catch (BadRequestHttpException | Exception $e) {
+            return response()->json(['message' => $e->getMessage()], match (true) {
+                $e instanceof BadRequestHttpException => 400,
+                default => 500,
+            });
         }
     }
 }
