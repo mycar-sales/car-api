@@ -5,6 +5,7 @@ namespace Tests\Unit\Http\Controllers;
 
 use App\Core\Domain\UseCases\BuscarTodosVeiculosDisponiveisUseCase;
 use App\Http\Controllers\BuscarTodosVeiculosDisponiveisController;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
 use Mockery;
@@ -16,13 +17,13 @@ use Mockery;
 final class BuscarTodosVeiculosDisponiveisControllerTest extends TestCase
 {
     /**
-     * @var BuscarTodosVeiculosDisponiveisUseCase|BuscarTodosVeiculosDisponiveisUseCase&Mockery\MockInterface&Mockery\LegacyMockInterface|Mockery\MockInterface&Mockery\LegacyMockInterface
+     * @var BuscarTodosVeiculosDisponiveisUseCase&Mockery\MockInterface&Mockery\LegacyMockInterface&Mockery\LegacyMockInterface
      */
     private $buscarTodosVeiculosDisponiveisUseCase;
     /**
      * @var BuscarTodosVeiculosDisponiveisController
      */
-    private $buscarTodosVeiculosDisponiveisController;
+    private BuscarTodosVeiculosDisponiveisController $buscarTodosVeiculosDisponiveisController;
 
     /**
      * @return void
@@ -30,7 +31,7 @@ final class BuscarTodosVeiculosDisponiveisControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
+        
         $this->buscarTodosVeiculosDisponiveisUseCase = Mockery::mock(BuscarTodosVeiculosDisponiveisUseCase::class);
         $this->buscarTodosVeiculosDisponiveisController = new BuscarTodosVeiculosDisponiveisController(
             $this->buscarTodosVeiculosDisponiveisUseCase
@@ -57,7 +58,7 @@ final class BuscarTodosVeiculosDisponiveisControllerTest extends TestCase
     public function testInternalServerErrorWhenExceptionIsThrown(): void
     {
         $this->buscarTodosVeiculosDisponiveisUseCase->shouldReceive('executar')
-            ->once()->andThrow(new \Exception());
+            ->once()->andThrow(new Exception());
 
         $response = $this->buscarTodosVeiculosDisponiveisController->__invoke();
 

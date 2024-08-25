@@ -11,6 +11,7 @@
       <directory>./app/Console</directory>
       <directory>./app/Listeners</directory>
       <file>./app/Http/Kernel.php</file>
+        <file>./app/Http/Controllers/Controller.php</file>
     </exclude>
     <report>
       <clover outputFile="/var/www/api/public/coverage/coverage.xml"/>
