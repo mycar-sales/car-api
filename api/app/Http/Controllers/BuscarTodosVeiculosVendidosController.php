@@ -28,6 +28,7 @@ use Exception;
  *                     @OA\Property(property="ano", type="integer", example=2022),
  *                     @OA\Property(property="cor", type="string", example="Red"),
  *                     @OA\Property(property="preco", type="number", format="float", example=10000.00),
+ *                     @OA\Property(property="placa", type="string", example="ABC-1234")
  *                 )
  *             )
  *         )

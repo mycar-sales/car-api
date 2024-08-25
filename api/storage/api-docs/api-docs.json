@@ -54,6 +54,10 @@
                                                         "type": "number",
                                                         "format": "float",
                                                         "example": 10000
+                                                    },
+                                                    "placa": {
+                                                        "type": "string",
+                                                        "example": "ABC-1234"
                                                     }
                                                 },
                                                 "type": "object"
@@ -127,6 +131,10 @@
                                                         "type": "number",
                                                         "format": "float",
                                                         "example": 10000
+                                                    },
+                                                    "placa": {
+                                                        "type": "string",
+                                                        "example": "ABC-1234"
                                                     }
                                                 },
                                                 "type": "object"
@@ -207,6 +215,14 @@
                                             "type": "number",
                                             "format": "float",
                                             "example": 10000
+                                        },
+                                        "placa": {
+                                            "type": "string",
+                                            "example": "ABC-1234"
+                                        },
+                                        "disponivel": {
+                                            "type": "bolean",
+                                            "example": true
                                         }
                                     },
                                     "type": "object"

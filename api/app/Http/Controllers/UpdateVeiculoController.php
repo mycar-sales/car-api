@@ -12,6 +12,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Exception;
 
 /**
+ * Class UpdateVeiculoController
+ * @package App\Http\Controllers
  * @OA\Put(
  *     path="/v1/veiculos/{id}",
  *     summary="Atualizar veículo",
