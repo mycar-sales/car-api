@@ -1,4 +1,5 @@
 name: Build
+
 on:
   push:
     branches:
@@ -6,6 +7,7 @@ on:
       - dev
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarcloud:
     name: SonarCloud
@@ -14,6 +16,30 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'  # Ajuste conforme necessário
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+        working-directory: ./api  # Ajuste para o diretório onde o composer.json está localizado
+
+      - name: Create coverage directory
+        run: mkdir -p public/coverage
+        working-directory: ./api
+
+      - name: Update phpunit.xml paths
+        run: |
+          sed -i 's|/var/www/api/public/coverage|public/coverage|g' phpunit.xml
+        working-directory: ./api
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit --coverage-clover=public/coverage/coverage.xml
+        working-directory: ./api
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

@@ -6,7 +6,11 @@
     </include>
     <exclude>
       <directory>./app/Exceptions</directory>
-      <directory>./app/Providers</directory>
+      <directory>./app/Providers/AppServiceProvider.php</directory>
+      <directory>./app/Providers/AuthServiceProvider.php</directory>
+      <directory>./app/Providers/BroadcastServiceProvider.php</directory>
+      <directory>./app/Providers/EventServiceProvider.php</directory>
+      <directory>./app/Providers/RouteServiceProvider.php</directory>
       <directory>./app/Http/Middleware</directory>
       <directory>./app/Console</directory>
       <directory>./app/Listeners</directory>
