@@ -1,0 +1,3 @@
+api/phpunit.xml.bak
+api/public/coverage/*
+!api/public/coverage/coverage.xml
