@@ -71,10 +71,10 @@ class CadastrarVeiculoController extends Controller
         try {
             $data = $request->validate(
                 [
-                'marca' => 'required|string|max:255',
-                'modelo' => 'required|string|max:255',
+                'marca' => self::STRING_REQUIRED_MAX_255,
+                'modelo' => self::STRING_REQUIRED_MAX_255,
                 'ano' => 'required|integer|min:1900|max:' . date('Y'),
-                'cor' => 'required|string|max:255',
+                'cor' => self::STRING_REQUIRED_MAX_255,
                 'preco' => 'required|numeric|min:0',
                 'placa' => 'required|string|max:8',
                 ]

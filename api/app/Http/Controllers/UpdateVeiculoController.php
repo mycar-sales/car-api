@@ -75,6 +75,7 @@ use Exception;
  */
 class UpdateVeiculoController extends Controller
 {
+
     /**
      * @var UpdateVeiculoUseCase
      */
@@ -98,25 +99,32 @@ class UpdateVeiculoController extends Controller
         try {
             $data = $request->validate(
                 [
-                'marca' => 'required|string|max:255',
-                'modelo' => 'required|string|max:255',
-                'ano' => 'required|integer|min:1900|max:' . date('Y'),
-                'cor' => 'required|string|max:255',
-                'preco' => 'required|numeric|min:0',
-                'placa' => 'required|string|max:10',
-                'disponivel' => 'nullable|boolean',
+                    'marca' => self::STRING_REQUIRED_MAX_255,
+                    'modelo' => self::STRING_REQUIRED_MAX_255,
+                    'ano' => 'required|integer|min:1900|max:' . date('Y'),
+                    'cor' => self::STRING_REQUIRED_MAX_255,
+                    'preco' => 'required|numeric|min:0',
+                    'placa' => 'required|string|max:10',
+                    'disponivel' => 'nullable|boolean',
                 ]
             );
 
             $this->updateVeiculoUseCase->executar($id, $data);
 
             return response()->json(['message' => 'Veículo atualizado com sucesso'], 200);
-        } catch (NotFoundHttpException $e) {
-            return response()->json(['message' => $e->getMessage()], 404);
-        } catch (BadRequestHttpException $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
         } catch (Exception $e) {
-            return response()->json(['message' => 'Erro interno do servidor'], 500);
+            return response()->json(
+                ['message' => match (true) {
+                    $e instanceof NotFoundHttpException => $e->getMessage(),
+                    $e instanceof BadRequestHttpException => $e->getMessage(),
+                    default => 'Erro interno do servidor',
+                }],
+                match (true) {
+                    $e instanceof NotFoundHttpException => 404,
+                    $e instanceof BadRequestHttpException => 400,
+                    default => 500,
+                }
+            );
         }
     }
 }
