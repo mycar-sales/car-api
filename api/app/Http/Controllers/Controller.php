@@ -12,4 +12,9 @@ class Controller extends BaseController
     use AuthorizesRequests;
     use DispatchesJobs;
     use ValidatesRequests;
+
+    /**
+     * @var string
+     */
+    protected const STRING_REQUIRED_MAX_255 = 'required|string|max:255';
 }

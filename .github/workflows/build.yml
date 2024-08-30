@@ -9,23 +9,23 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  tests:
+    name: Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0 # Shallow clones should be disabled
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'  # Ajuste conforme necessário
+          php-version: '8.0'
           coverage: xdebug
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
-        working-directory: ./api  # Ajuste para o diretório onde o composer.json está localizado
+        working-directory: ./api
 
       - name: Create coverage directory
         run: mkdir -p public/coverage
@@ -43,5 +43,68 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  code_quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+        working-directory: ./api
+
+      - name: Create coverage directory
+        run: mkdir -p public/coverage
+        working-directory: ./api
+
+      - name: Fetch coverage data from SonarCloud
+        run: |
+          # Ensure the directory exists
+          mkdir -p public/coverage
+
+          # Fetch coverage data from SonarCloud
+          curl -u ${{ secrets.SONAR_TOKEN }} "https://sonarcloud.io/api/measures/component?componentKey=mycar-sales_car-api&metricKeys=coverage,new_coverage" -o public/coverage/coverage.json
+
+          # Check if the file was created
+          if [ ! -f public/coverage/coverage.json ]; then
+            echo "Coverage data file not found."
+            exit 1
+          fi
+
+          # Parse coverage data
+          overall=$(jq -r '.component.measures[] | select(.metric=="coverage") | .value' public/coverage/coverage.json || echo "0")
+          new=$(jq -r '.component.measures[] | select(.metric=="new_coverage") | .value' public/coverage/coverage.json || echo "0")
+
+          # Set default value for new coverage if it's not available
+          new=${new:-0}
+
+          # Check if the values are valid numbers
+          if ! [[ "$overall" =~ ^[0-9]+(\.[0-9]+)?$ ]] || ! [[ "$new" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+            echo "Invalid coverage data: Overall=$overall, New=$new"
+            exit 1
+          fi
+
+          # Convert to float for comparison
+          overall_float=$(echo "$overall" | sed 's/[^0-9.]//g')
+          new_float=$(echo "$new" | sed 's/[^0-9.]//g')
+
+          # Calculate the percentage drop
+          drop=$(echo "scale=2; $overall_float - $new_float" | bc)
+          if (( $(echo "$drop > 1" | bc -l) )); then
+            echo "Coverage dropped more than 1% on new code compared to overall code."
+            exit 1
+          else
+            echo "Coverage drop is within acceptable limits."
+          fi
+        env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
