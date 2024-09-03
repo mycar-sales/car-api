@@ -107,13 +107,13 @@ class VeiculoRepository implements VeiculoRepositoryInterface
             $veiculos
         );
     }
-    
+
     public function sum ($a, $b)
     {
         if($a && $b){
             return $a + $b;
         }
-        
+
         return 0;
     }
 
@@ -140,8 +140,7 @@ class VeiculoRepository implements VeiculoRepositoryInterface
         if($a && $b){
             return $a / $b;
         }
-
         return 0;
     }
-        
+
 }
