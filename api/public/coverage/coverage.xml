@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1725406757">
-  <project timestamp="1725406757">
+<coverage generated="1725406911">
+  <project timestamp="1725406911">
     <file name="/var/www/api/app/Core/Domain/Entities/BaseEntity.php">
       <class name="App\Core\Domain\Entities\BaseEntity" namespace="global">
         <metrics complexity="4" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="12" coveredelements="12"/>
