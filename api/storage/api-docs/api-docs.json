@@ -1,0 +1,507 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Veículos",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api/v1",
+            "description": "API para gerenciamento de veículos"
+        }
+    ],
+    "paths": {
+        "/veiculos/disponiveis": {
+            "get": {
+                "tags": [
+                    "Veículos"
+                ],
+                "summary": "Buscar todos os veículos disponíveis",
+                "description": "Class BuscarTodosVeiculosDisponiveisController",
+                "operationId": "9b8f2a084e196375108a339eb7d306af",
+                "responses": {
+                    "200": {
+                        "description": "Lista de veículos disponíveis",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "marca": {
+                                                        "type": "string",
+                                                        "example": "Toyota"
+                                                    },
+                                                    "modelo": {
+                                                        "type": "string",
+                                                        "example": "Corolla"
+                                                    },
+                                                    "ano": {
+                                                        "type": "integer",
+                                                        "example": 2022
+                                                    },
+                                                    "cor": {
+                                                        "type": "string",
+                                                        "example": "Red"
+                                                    },
+                                                    "preco": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 10000
+                                                    },
+                                                    "placa": {
+                                                        "type": "string",
+                                                        "example": "ABC-1234"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/veiculos/vendidos": {
+            "get": {
+                "tags": [
+                    "Veículos"
+                ],
+                "summary": "Buscar todos os veículos vendidos",
+                "description": "Class BuscarTodosVeiculosVendidosController",
+                "operationId": "86158df53225327146c7dba0584c6f91",
+                "responses": {
+                    "200": {
+                        "description": "Lista de veículos vendidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "marca": {
+                                                        "type": "string",
+                                                        "example": "Toyota"
+                                                    },
+                                                    "modelo": {
+                                                        "type": "string",
+                                                        "example": "Corolla"
+                                                    },
+                                                    "ano": {
+                                                        "type": "integer",
+                                                        "example": 2022
+                                                    },
+                                                    "cor": {
+                                                        "type": "string",
+                                                        "example": "Red"
+                                                    },
+                                                    "preco": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 10000
+                                                    },
+                                                    "placa": {
+                                                        "type": "string",
+                                                        "example": "ABC-1234"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/veiculos/{id}": {
+            "get": {
+                "tags": [
+                    "Veículos"
+                ],
+                "summary": "Buscar um veículo pelo ID",
+                "description": "Class BuscarVeiculoPorIdController",
+                "operationId": "55151859fa71aa928bfa17cda03ab1a4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do veículo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Veículo encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "marca": {
+                                            "type": "string",
+                                            "example": "Toyota"
+                                        },
+                                        "modelo": {
+                                            "type": "string",
+                                            "example": "Corolla"
+                                        },
+                                        "ano": {
+                                            "type": "integer",
+                                            "example": 2022
+                                        },
+                                        "cor": {
+                                            "type": "string",
+                                            "example": "Red"
+                                        },
+                                        "preco": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 10000
+                                        },
+                                        "placa": {
+                                            "type": "string",
+                                            "example": "ABC-1234"
+                                        },
+                                        "disponivel": {
+                                            "type": "bolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Veículo não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/veiculos": {
+            "post": {
+                "tags": [
+                    "Veículos"
+                ],
+                "summary": "Cadastrar um novo veículo",
+                "operationId": "165768d985d1c996c8cd7e04d724c5bd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "marca": {
+                                        "type": "string",
+                                        "example": "Toyota"
+                                    },
+                                    "modelo": {
+                                        "type": "string",
+                                        "example": "Corolla"
+                                    },
+                                    "ano": {
+                                        "type": "integer",
+                                        "example": 2022
+                                    },
+                                    "cor": {
+                                        "type": "string",
+                                        "example": "Red"
+                                    },
+                                    "preco": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10000
+                                    },
+                                    "placa": {
+                                        "type": "string",
+                                        "example": "ABC-1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Veículo cadastrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Veículo cadastrado com sucesso"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/veiculos/{id}": {
+            "put": {
+                "tags": [
+                    "Veículos"
+                ],
+                "summary": "Atualizar veículo",
+                "description": "Atualiza as informações de um veículo existente.",
+                "operationId": "5d924e728d85deba14e52471d30c1cbb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do veículo a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "marca",
+                                    "modelo",
+                                    "ano",
+                                    "cor",
+                                    "preco",
+                                    "placa"
+                                ],
+                                "properties": {
+                                    "marca": {
+                                        "type": "string",
+                                        "example": "Toyota"
+                                    },
+                                    "modelo": {
+                                        "type": "string",
+                                        "example": "Corolla"
+                                    },
+                                    "ano": {
+                                        "type": "integer",
+                                        "example": 2022
+                                    },
+                                    "cor": {
+                                        "type": "string",
+                                        "example": "Prata"
+                                    },
+                                    "preco": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10000
+                                    },
+                                    "placa": {
+                                        "type": "string",
+                                        "example": "XYZ-1234"
+                                    },
+                                    "disponivel": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Veículo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Veículo atualizado com sucesso"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de validação dos dados fornecidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro de validação"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Veículo não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Veículos",
+            "description": "Veículos"
+        }
+    ]
+}

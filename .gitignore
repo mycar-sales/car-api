@@ -1,0 +1,6 @@
+api/phpunit.xml.bak
+docs
+k8s
+index.php
+api/public/coverage/*
+!api/public/coverage/coverage.xml

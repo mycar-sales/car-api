@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<ruleset name="Custom Coding Standard">
+    <!-- Define the coding standard to use (PSR-12 in this case) -->
+    <rule ref="PSR12"/>
+
+    <!-- Specify the directories to include -->
+    <file>./app</file>
+    <file>./tests</file>
+
+    <!-- Exclude specific files or directories if needed -->
+    <exclude-pattern>*/tests/fixtures/*</exclude-pattern>
+
+    <!-- Define the standard and any custom rules you want to include -->
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <severity>5</severity>
+    </rule>
+
+    <rule ref="Squiz.Functions.MultiLineFunctionDeclaration">
+        <severity>10</severity>
+    </rule>
+
+    <!-- Set the error severity threshold (0-10, with 10 being the most severe) -->
+    <rule ref="PEAR.Functions.FunctionCallSignature">
+        <severity>5</severity>
+    </rule>
+
+    <!-- Include custom rules or additional standards here -->
+</ruleset>
