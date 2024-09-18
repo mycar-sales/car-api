@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1726693712">
-  <project timestamp="1726693712">
+<coverage generated="1726694489">
+  <project timestamp="1726694489">
     <file name="/var/www/api/app/Core/Domain/Entities/BaseEntity.php">
       <class name="App\Core\Domain\Entities\BaseEntity" namespace="global">
         <metrics complexity="4" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="12" coveredelements="0"/>
@@ -325,7 +325,7 @@
     </file>
     <file name="/var/www/api/app/Infrastructure/Persistence/VeiculoRepository.php">
       <class name="App\Infrastructure\Persistence\VeiculoRepository" namespace="global">
-        <metrics complexity="21" methods="10" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="84" coveredstatements="81" elements="94" coveredelements="90"/>
+        <metrics complexity="6" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="69" elements="74" coveredelements="74"/>
       </class>
       <line num="17" type="method" name="save" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="19" type="stmt" count="2"/>
@@ -401,39 +401,19 @@
       <line num="106" type="stmt" count="1"/>
       <line num="107" type="stmt" count="1"/>
       <line num="108" type="stmt" count="1"/>
-      <line num="112" type="method" name="sum" visibility="public" complexity="3" crap="3" count="2"/>
-      <line num="114" type="stmt" count="2"/>
-      <line num="115" type="stmt" count="1"/>
-      <line num="118" type="stmt" count="1"/>
-      <line num="121" type="method" name="sub" visibility="public" complexity="3" crap="3" count="2"/>
-      <line num="123" type="stmt" count="2"/>
-      <line num="124" type="stmt" count="1"/>
-      <line num="127" type="stmt" count="1"/>
-      <line num="130" type="method" name="mult" visibility="public" complexity="3" crap="3" count="2"/>
-      <line num="132" type="stmt" count="2"/>
-      <line num="133" type="stmt" count="1"/>
-      <line num="136" type="stmt" count="1"/>
-      <line num="139" type="method" name="div" visibility="public" complexity="3" crap="3" count="2"/>
-      <line num="141" type="stmt" count="2"/>
-      <line num="142" type="stmt" count="1"/>
-      <line num="144" type="stmt" count="1"/>
-      <line num="147" type="method" name="percent" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="149" type="stmt" count="0"/>
-      <line num="150" type="stmt" count="0"/>
-      <line num="152" type="stmt" count="0"/>
-      <metrics loc="155" ncloc="155" classes="1" methods="10" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="84" coveredstatements="81" elements="94" coveredelements="90"/>
+      <metrics loc="111" ncloc="111" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="69" elements="74" coveredelements="74"/>
     </file>
     <file name="/var/www/api/app/Providers/VeiculoRepositoyProvider.php">
       <class name="App\Providers\VeiculoRepositoyProvider" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
       </class>
-      <line num="16" type="method" name="register" visibility="public" complexity="1" crap="1" count="17"/>
-      <line num="18" type="stmt" count="17"/>
-      <line num="19" type="stmt" count="17"/>
-      <line num="20" type="stmt" count="17"/>
-      <line num="21" type="stmt" count="17"/>
+      <line num="16" type="method" name="register" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="18" type="stmt" count="9"/>
+      <line num="19" type="stmt" count="9"/>
+      <line num="20" type="stmt" count="9"/>
+      <line num="21" type="stmt" count="9"/>
       <metrics loc="24" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
     </file>
-    <metrics files="20" loc="1302" ncloc="868" classes="19" methods="62" coveredmethods="23" conditionals="0" coveredconditionals="0" statements="254" coveredstatements="112" elements="316" coveredelements="135"/>
+    <metrics files="20" loc="1258" ncloc="824" classes="19" methods="57" coveredmethods="19" conditionals="0" coveredconditionals="0" statements="239" coveredstatements="100" elements="296" coveredelements="119"/>
   </project>
 </coverage>
