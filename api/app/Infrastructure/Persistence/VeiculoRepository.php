@@ -107,48 +107,4 @@ class VeiculoRepository implements VeiculoRepositoryInterface
             $veiculos
         );
     }
-
-
-    public function sum($a, $b)
-    {
-        if ($a && $b) {
-            return $a + $b;
-        }
-
-        return 0;
-    }
-
-    public function sub($a, $b)
-    {
-        if ($a && $b) {
-            return $a - $b;
-        }
-
-        return 0;
-    }
-
-    public function mult($a, $b)
-    {
-        if ($a && $b) {
-            return $a * $b;
-        }
-
-        return 0;
-    }
-
-    public function div($a, $b)
-    {
-        if ($a && $b) {
-            return $a / $b;
-        }
-        return 0;
-    }
-
-    public function percent($a, $b)
-    {
-        if ($a && $b) {
-            return $a / $b * $a;
-        }
-        return 0;
-    }
 }
