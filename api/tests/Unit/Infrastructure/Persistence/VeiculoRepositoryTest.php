@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Unit\Infrastructure\Persistence;
@@ -105,7 +106,6 @@ final class VeiculoRepositoryTest extends TestCase
 
         $veiculo = $this->veiculoRepository->findById(1);
         $this->assertEquals(null, $veiculo);
-
     }
 
     public function testVehicleCanBeSaved(): void
@@ -314,5 +314,60 @@ final class VeiculoRepositoryTest extends TestCase
             ->andReturn(0);
 
         $this->veiculoRepository->update($veiculo);
+    }
+    public function testSumWithPositiveNumbers()
+    {
+        $repository = new VeiculoRepository();
+        $result = $repository->sum(5, 10);
+        $this->assertEquals(15, $result);
+    }
+
+    public function testSumWithZero()
+    {
+        $repository = new VeiculoRepository();
+        $result = $repository->sum(0, 10);
+        $this->assertEquals(0, $result);
+    }
+
+    public function testSubtractionWithPositiveNumbers()
+    {
+        $repository = new VeiculoRepository();
+        $result = $repository->sub(10, 5);
+        $this->assertEquals(5, $result);
+    }
+
+    public function testSubtractionWithZero()
+    {
+        $repository = new VeiculoRepository();
+        $result = $repository->sub(0, 5);
+        $this->assertEquals(0, $result);
+    }
+
+    public function testMultiplicationWithPositiveNumbers()
+    {
+        $repository = new VeiculoRepository();
+        $result = $repository->mult(5, 10);
+        $this->assertEquals(50, $result);
+    }
+
+    public function testMultiplicationWithZero()
+    {
+        $repository = new VeiculoRepository();
+        $result = $repository->mult(0, 10);
+        $this->assertEquals(0, $result);
+    }
+
+    public function testDivisionWithPositiveNumbers()
+    {
+        $repository = new VeiculoRepository();
+        $result = $repository->div(10, 5);
+        $this->assertEquals(2, $result);
+    }
+
+    public function testDivisionWithZero()
+    {
+        $repository = new VeiculoRepository();
+        $result = $repository->div(0, 5);
+        $this->assertEquals(0, $result);
     }
 }
