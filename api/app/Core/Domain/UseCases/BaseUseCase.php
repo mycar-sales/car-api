@@ -23,6 +23,7 @@ abstract class BaseUseCase
         return array_map(
             function ($veiculo) {
                 return [
+                'id' => $veiculo->getId(),
                 'marca' => $veiculo->getMarca()->getValue(),
                 'modelo' => $veiculo->getModelo()->getValue(),
                 'ano' => $veiculo->getAno(),

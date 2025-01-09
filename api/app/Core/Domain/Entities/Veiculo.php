@@ -15,32 +15,6 @@ use App\Core\Domain\ValueObjects\VeiculoPreco;
  */
 class Veiculo extends BaseEntity
 {
-    private $id;
-    /**
-     * @var VeiculoMarca
-     */
-    private VeiculoMarca $marca;
-    /**
-     * @var VeiculoModelo
-     */
-    private VeiculoModelo $modelo;
-    /**
-     * @var int
-     */
-    private int $ano;
-    /**
-     * @var VeiculoCor
-     */
-    private VeiculoCor $cor;
-    /**
-     * @var VeiculoPreco
-     */
-    private VeiculoPreco $preco;
-
-    private $placa;
-
-    private $disponivel;
-
     /**
      * @param VeiculoMarca $marca
      * @param VeiculoModelo $modelo
@@ -49,23 +23,18 @@ class Veiculo extends BaseEntity
      * @param VeiculoPreco $preco
      * @param $placa
      * @param bool $disponivel
+     * @param int|null $id
      */
     public function __construct(
-        VeiculoMarca $marca,
-        VeiculoModelo $modelo,
-        int $ano,
-        VeiculoCor $cor,
-        VeiculoPreco $preco,
-        $placa,
-        bool $disponivel = true
+        private VeiculoMarca $marca,
+        private VeiculoModelo $modelo,
+        private int $ano,
+        private VeiculoCor $cor,
+        private VeiculoPreco $preco,
+        private $placa,
+        private bool $disponivel = true,
+        private ?int $id = null
     ) {
-        $this->marca = $marca;
-        $this->modelo = $modelo;
-        $this->ano = $ano;
-        $this->cor = $cor;
-        $this->preco = $preco;
-        $this->placa = $placa;
-        $this->disponivel = $disponivel;
     }
 
     /**
@@ -175,17 +144,17 @@ class Veiculo extends BaseEntity
     }
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }

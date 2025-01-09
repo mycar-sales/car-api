@@ -60,7 +60,8 @@ class VeiculoRepository implements VeiculoRepositoryInterface
             new VeiculoCor($veiculo->cor),
             new VeiculoPreco((float) $veiculo->preco),
             $veiculo->placa,
-            (bool) $veiculo->disponivel
+            (bool) $veiculo->disponivel,
+            $veiculo->id
         );
     }
 
@@ -80,6 +81,8 @@ class VeiculoRepository implements VeiculoRepositoryInterface
                     new VeiculoCor($veiculo->cor),
                     new VeiculoPreco((float) $veiculo->preco),
                     $veiculo->placa,
+                    true,
+                    $veiculo->id
                 );
             },
             $veiculos
@@ -102,6 +105,8 @@ class VeiculoRepository implements VeiculoRepositoryInterface
                     new VeiculoCor($veiculo->cor),
                     new VeiculoPreco((float) $veiculo->preco),
                     $veiculo->placa,
+                    false,
+                    $veiculo->id
                 );
             },
             $veiculos
