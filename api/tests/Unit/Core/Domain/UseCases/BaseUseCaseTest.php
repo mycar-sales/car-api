@@ -19,7 +19,8 @@ class BaseUseCaseTest extends TestCase
             new VeiculoCor('Red'),
             new VeiculoPreco(10000.00),
             'ABC-1234',
-            true
+            true,
+            1
         );
 
         $veiculo2 = new Veiculo(
@@ -47,7 +48,8 @@ class BaseUseCaseTest extends TestCase
                 'cor' => 'Red',
                 'preco' => 10000.00,
                 'disponivel' => true,
-                'placa' => 'ABC-1234'
+                'placa' => 'ABC-1234',
+                'id' => 1,
             ],
             [
                 'marca' => 'Ford',
@@ -56,7 +58,8 @@ class BaseUseCaseTest extends TestCase
                 'cor' => 'Blue',
                 'preco' => 9000.00,
                 'disponivel' => false,
-                'placa' => 'XYZ-5678'
+                'placa' => 'XYZ-5678',
+                'id' => null,
             ]
         ];
 

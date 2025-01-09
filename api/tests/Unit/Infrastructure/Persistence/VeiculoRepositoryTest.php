@@ -57,7 +57,8 @@ final class VeiculoRepositoryTest extends TestCase
             'cor' => 'Red',
             'preco' => 10000.00,
             'placa' => 'ABC-1234',
-            'disponivel' => true
+            'disponivel' => true,
+            'id' => 1
         ];
 
         DB::shouldReceive('table')
@@ -80,6 +81,7 @@ final class VeiculoRepositoryTest extends TestCase
         $this->assertEquals(2022, $veiculo->getAno());
         $this->assertEquals('Red', $veiculo->getCor()->getValue());
         $this->assertEquals('10000', $veiculo->getPreco()->getValue());
+        $this->assertEquals(1, $veiculo->getId());
     }
 
     public function testFindByIdNotFound(): void
@@ -141,7 +143,8 @@ final class VeiculoRepositoryTest extends TestCase
             'cor' => 'Red',
             'preco' => 10000.00,
             'placa' => 'ABC-1234',
-            'disponivel' => true
+            'disponivel' => true,
+            'id' => 1
         ];
 
         DB::shouldReceive('table')
@@ -164,6 +167,7 @@ final class VeiculoRepositoryTest extends TestCase
         $this->assertEquals(2022, $veiculo->getAno());
         $this->assertEquals('Red', $veiculo->getCor()->getValue());
         $this->assertEquals('10000', $veiculo->getPreco()->getValue());
+        $this->assertEquals(1, $veiculo->getId());
     }
 
     public function testAllAvailableVehiclesCanBeFound(): void
@@ -175,7 +179,9 @@ final class VeiculoRepositoryTest extends TestCase
                 'ano' => 2022,
                 'cor' => 'Red',
                 'preco' => 10000.00,
-                'placa' => 'ABC-1234'
+                'placa' => 'ABC-1234',
+                'disponivel' => true,
+                'id' => 3
             ],
             (object) [
                 'marca' => 'Ford',
@@ -184,6 +190,8 @@ final class VeiculoRepositoryTest extends TestCase
                 'cor' => 'Blue',
                 'preco' => 9000.00,
                 'placa' => 'DEF-5678',
+                'disponivel' => false,
+                'id' => 4
             ]
         ];
 
@@ -203,13 +211,14 @@ final class VeiculoRepositoryTest extends TestCase
             ->andReturnSelf()
             ->shouldReceive('toArray')
             ->once()
-            ->andReturn($veiculosData);
+            ->andReturn(array_filter($veiculosData, fn($veiculo) => $veiculo->disponivel));
 
         $veiculos = $this->veiculoRepository->findAllAvailable();
 
-        $this->assertCount(2, $veiculos);
+        $this->assertCount(1, $veiculos);
+        $this->assertEquals(3, $veiculos[0]->getId());
         $this->assertInstanceOf(Veiculo::class, $veiculos[0]);
-        $this->assertInstanceOf(Veiculo::class, $veiculos[1]);
+        $this->assertArrayNotHasKey(1, $veiculos);
     }
 
     public function testAllSoldVehiclesCanBeFound(): void
@@ -221,7 +230,10 @@ final class VeiculoRepositoryTest extends TestCase
                 'ano' => 2022,
                 'cor' => 'Red',
                 'preco' => 10000.00,
-                'placa' => 'ABC-1234'
+                'placa' => 'ABC-1234',
+                'disponivel' => true,
+                'id' => 4
+
             ],
             (object) [
                 'marca' => 'Ford',
@@ -230,6 +242,8 @@ final class VeiculoRepositoryTest extends TestCase
                 'cor' => 'Blue',
                 'preco' => 9000.00,
                 'placa' => 'DEF-5678',
+                'disponivel' => false,
+                'id' => 4
             ]
         ];
 
@@ -249,13 +263,14 @@ final class VeiculoRepositoryTest extends TestCase
             ->andReturnSelf()
             ->shouldReceive('toArray')
             ->once()
-            ->andReturn($veiculosData);
+            ->andReturn(array_filter($veiculosData, fn($veiculo) => !$veiculo->disponivel));
 
         $veiculos = $this->veiculoRepository->findAllSold();
 
-        $this->assertCount(2, $veiculos);
-        $this->assertInstanceOf(Veiculo::class, $veiculos[0]);
+        $this->assertCount(1, $veiculos);
+        $this->assertArrayNotHasKey(0, $veiculos);
         $this->assertInstanceOf(Veiculo::class, $veiculos[1]);
+        $this->assertEquals(4, $veiculos[1]->getId());
     }
 
     public function testVeiculoCanBeUpdated(): void

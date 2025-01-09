@@ -20,7 +20,9 @@ final class VeiculoTest extends TestCase
             2022,
             new VeiculoCor('Red'),
             new VeiculoPreco(10000.00),
-            'ABC-1234'
+            'ABC-1234',
+            true,
+            5
         );
 
         $this->assertInstanceOf(Veiculo::class, $vehicle);
@@ -30,6 +32,8 @@ final class VeiculoTest extends TestCase
         $this->assertEquals('Red', $vehicle->getCor()->getValue());
         $this->assertEquals('10000', $vehicle->getPreco()->getValue());
         $this->assertEquals('ABC-1234', $vehicle->getPlaca());
+        $this->assertEquals(true, $vehicle->isDisponivel());
+        $this->assertEquals(5, $vehicle->getId());
     }
 
     public function testMarcaCanBeSetAndRetrieved(): void
@@ -147,7 +151,7 @@ final class VeiculoTest extends TestCase
         $veiculo->setDisponivel(false);
         $this->assertFalse($veiculo->isDisponivel());
     }
-    
+
     public function testCanBeCreatedWithDifferentValues(): void
     {
         $vehicle = new Veiculo(
