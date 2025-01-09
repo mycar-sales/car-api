@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Core\Domain\Entities;
@@ -20,15 +21,15 @@ abstract class BaseEntity
         $reflection = new ReflectionClass($this);
 
         foreach ($reflection->getProperties() as $property) {
-            if (!$property->isPublic()) {
+            if (!$property->isPublic() || !property_exists($this, $property->getName())) {
                 continue;
             }
-            
+
             //NOSONAR
             $value = $property->getValue($this);
 
             if (is_object($value)) {
-                $array[$property->getName()] = (string)$value;
+                $array[$property->getName()] = method_exists($value, '__toString') ? (string)$value : null;
                 continue;
             }
 
