@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Core\Domain\UseCases\CadastrarVeiculoUseCase;
+use App\Core\Domain\Veiculos\UseCases\CadastrarVeiculoUseCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

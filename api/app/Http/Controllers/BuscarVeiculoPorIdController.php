@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Core\Domain\UseCases\BuscarVeiculoPorIdUseCase;
+use App\Core\Domain\Veiculos\UseCases\BuscarVeiculoPorIdUseCase;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Exception;

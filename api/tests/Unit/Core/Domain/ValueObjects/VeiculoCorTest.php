@@ -5,7 +5,7 @@ namespace Tests\Unit\Core\Domain\ValueObjects;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use App\Core\Domain\ValueObjects\VeiculoCor;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoCor;
 
 final class VeiculoCorTest extends TestCase
 {

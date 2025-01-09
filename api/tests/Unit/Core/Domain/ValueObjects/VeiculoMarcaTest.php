@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Core\Domain\ValueObjects;
 
-use App\Core\Domain\ValueObjects\VeiculoMarca;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoMarca;
 use PHPUnit\Framework\TestCase;
 use InvalidArgumentException;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Core\Domain\ValueObjects;
 
 use PHPUnit\Framework\TestCase;
-use App\Core\Domain\ValueObjects\VeiculoPreco;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoPreco;
 use InvalidArgumentException;
 
  class VeiculoPrecoTest extends TestCase

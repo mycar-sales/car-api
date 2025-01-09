@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Providers;
 
-use App\Core\Domain\Repositories\VeiculoRepositoryInterface;
+use App\Core\Domain\Veiculos\Repositories\VeiculoRepositoryInterface;
 use App\Infrastructure\Persistence\VeiculoRepository;
 use App\Providers\VeiculoRepositoyProvider;
 use Illuminate\Foundation\Application;

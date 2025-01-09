@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Http\Controllers;
 
-use App\Core\Domain\UseCases\CadastrarVeiculoUseCase;
+use App\Core\Domain\Veiculos\UseCases\CadastrarVeiculoUseCase;
 use App\Http\Controllers\CadastrarVeiculoController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

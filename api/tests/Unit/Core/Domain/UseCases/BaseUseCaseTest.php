@@ -1,12 +1,12 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use App\Core\Domain\UseCases\BaseUseCase;
-use App\Core\Domain\Entities\Veiculo;
-use App\Core\Domain\ValueObjects\VeiculoMarca;
-use App\Core\Domain\ValueObjects\VeiculoModelo;
-use App\Core\Domain\ValueObjects\VeiculoCor;
-use App\Core\Domain\ValueObjects\VeiculoPreco;
+use App\Core\Domain\Veiculos\UseCases\BaseUseCase;
+use App\Core\Domain\Veiculos\Entities\Veiculo;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoMarca;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoModelo;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoCor;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoPreco;
 
 class BaseUseCaseTest extends TestCase
 {

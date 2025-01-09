@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Domain\UseCases;
+namespace App\Core\Domain\Veiculos\UseCases;
 
-use App\Core\Domain\Entities\Veiculo;
-use App\Core\Domain\Repositories\VeiculoRepositoryInterface;
+use App\Core\Domain\Veiculos\Entities\Veiculo;
+use App\Core\Domain\Veiculos\Repositories\VeiculoRepositoryInterface;
 
 /**
  * Class BuscarVeiculoPorIdUseCase

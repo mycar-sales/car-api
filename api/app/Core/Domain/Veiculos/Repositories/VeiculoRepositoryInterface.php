@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Domain\Repositories;
+namespace App\Core\Domain\Veiculos\Repositories;
 
-use App\Core\Domain\Entities\Veiculo;
+use App\Core\Domain\Veiculos\Entities\Veiculo;
 
 /**
  *

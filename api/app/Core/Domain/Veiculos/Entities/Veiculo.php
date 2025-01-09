@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Domain\Entities;
+namespace App\Core\Domain\Veiculos\Entities;
 
-use App\Core\Domain\ValueObjects\VeiculoMarca;
-use App\Core\Domain\ValueObjects\VeiculoModelo;
-use App\Core\Domain\ValueObjects\VeiculoCor;
-use App\Core\Domain\ValueObjects\VeiculoPreco;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoMarca;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoModelo;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoCor;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoPreco;
 
 /**
  * Class Veiculo
- * @package App\Core\Domain\Entities
+ * @package App\Core\Domain\Veiculos\Entities
  */
 class Veiculo extends BaseEntity
 {

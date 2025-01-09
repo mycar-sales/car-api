@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Http\Controllers;
 
-use App\Core\Domain\UseCases\BuscarTodosVeiculosDisponiveisUseCase;
+use App\Core\Domain\Veiculos\UseCases\BuscarTodosVeiculosDisponiveisUseCase;
 use App\Http\Controllers\BuscarTodosVeiculosDisponiveisController;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -31,7 +31,7 @@ final class BuscarTodosVeiculosDisponiveisControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->buscarTodosVeiculosDisponiveisUseCase = Mockery::mock(BuscarTodosVeiculosDisponiveisUseCase::class);
         $this->buscarTodosVeiculosDisponiveisController = new BuscarTodosVeiculosDisponiveisController(
             $this->buscarTodosVeiculosDisponiveisUseCase

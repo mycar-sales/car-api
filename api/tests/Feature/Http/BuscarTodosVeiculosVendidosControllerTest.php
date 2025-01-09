@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Http\Controllers;
 
-use App\Core\Domain\UseCases\BuscarTodosVeiculosVendidosUseCase;
+use App\Core\Domain\Veiculos\UseCases\BuscarTodosVeiculosVendidosUseCase;
 use App\Http\Controllers\BuscarTodosVeiculosVendidosController;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -31,7 +31,7 @@ final class BuscarTodosVeiculosVendidosControllerTest extends TestCase
         $this->buscarTodosVeiculosVendidosUseCase->shouldReceive('executar')
             ->once()->andReturn($this->buscarTodosVeiculosVendidosUseCase)
             ->shouldReceive('toArray')->once()->andReturn([]);
-        
+
         $response = $this->buscarTodosVeiculosVendidosController->__invoke();
 
         $this->assertInstanceOf(JsonResponse::class, $response);

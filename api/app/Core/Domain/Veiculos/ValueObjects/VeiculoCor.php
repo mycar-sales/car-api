@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Domain\ValueObjects;
+namespace App\Core\Domain\Veiculos\ValueObjects;
 
+use App\Core\Domain\Veiculos\Entities\BaseEntity;
 use InvalidArgumentException;
 
-class VeiculoMarca
+class VeiculoCor extends BaseEntity
 {
     private string $value;
 
     public function __construct(string $value)
     {
         if (empty($value)) {
-            throw new InvalidArgumentException("Veiculo Marca cannot be empty");
+            throw new InvalidArgumentException("Veiculo cor cannot be empty");
         }
 
         $this->value = $value;

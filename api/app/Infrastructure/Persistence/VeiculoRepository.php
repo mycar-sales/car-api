@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence;
 
-use App\Core\Domain\Entities\Veiculo;
-use App\Core\Domain\Repositories\VeiculoRepositoryInterface;
-use App\Core\Domain\ValueObjects\VeiculoCor;
-use App\Core\Domain\ValueObjects\VeiculoMarca;
-use App\Core\Domain\ValueObjects\VeiculoModelo;
-use App\Core\Domain\ValueObjects\VeiculoPreco;
+use App\Core\Domain\Veiculos\Entities\Veiculo;
+use App\Core\Domain\Veiculos\Repositories\VeiculoRepositoryInterface;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoCor;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoMarca;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoModelo;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoPreco;
 use Illuminate\Support\Facades\DB;
 
 class VeiculoRepository implements VeiculoRepositoryInterface

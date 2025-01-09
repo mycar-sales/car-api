@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Domain\Entities;
+namespace App\Core\Domain\Veiculos\Entities;
 
 use ReflectionClass;
 use ReflectionException;

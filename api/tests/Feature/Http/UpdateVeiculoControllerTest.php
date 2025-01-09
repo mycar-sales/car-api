@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Http\Controllers;
 
-use App\Core\Domain\UseCases\UpdateVeiculoUseCase;
+use App\Core\Domain\Veiculos\UseCases\UpdateVeiculoUseCase;
 use App\Http\Controllers\UpdateVeiculoController;
 use Exception;
 use Illuminate\Http\JsonResponse;

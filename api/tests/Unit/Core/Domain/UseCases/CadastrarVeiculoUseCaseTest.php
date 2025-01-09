@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Core\Domain\UseCases;
 
-use App\Core\Domain\Repositories\VeiculoRepositoryInterface;
-use App\Core\Domain\UseCases\CadastrarVeiculoUseCase;
+use App\Core\Domain\Veiculos\Repositories\VeiculoRepositoryInterface;
+use App\Core\Domain\Veiculos\UseCases\CadastrarVeiculoUseCase;
 use InvalidArgumentException;
 use Tests\TestCase;
 use Mockery;

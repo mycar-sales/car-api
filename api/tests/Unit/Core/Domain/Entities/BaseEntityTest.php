@@ -1,7 +1,7 @@
 <?php
 
 use Tests\TestCase;
-use App\Core\Domain\Entities\BaseEntity;
+use App\Core\Domain\Veiculos\Entities\BaseEntity;
 
 class BaseEntityTest extends TestCase
 {

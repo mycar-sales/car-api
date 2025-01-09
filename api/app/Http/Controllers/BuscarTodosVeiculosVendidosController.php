@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Core\Domain\UseCases\BuscarTodosVeiculosVendidosUseCase;
+use App\Core\Domain\Veiculos\UseCases\BuscarTodosVeiculosVendidosUseCase;
 use Illuminate\Http\JsonResponse;
 use Exception;
 

@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Core\Domain\Entities\Veiculo;
-use App\Core\Domain\UseCases\BuscarVeiculoPorIdUseCase;
-use App\Core\Domain\ValueObjects\VeiculoCor;
-use App\Core\Domain\ValueObjects\VeiculoMarca;
-use App\Core\Domain\ValueObjects\VeiculoModelo;
-use App\Core\Domain\ValueObjects\VeiculoPreco;
+use App\Core\Domain\Veiculos\Entities\Veiculo;
+use App\Core\Domain\Veiculos\UseCases\BuscarVeiculoPorIdUseCase;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoCor;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoMarca;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoModelo;
+use App\Core\Domain\Veiculos\ValueObjects\VeiculoPreco;
 use App\Http\Controllers\BuscarVeiculoPorIdController;
 use Exception;
 use Illuminate\Http\JsonResponse;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Domain\UseCases;
+namespace App\Core\Domain\Veiculos\UseCases;
 
 /**
  * Class BaseUseCase
- * @package App\Core\Domain\UseCases
+ * @package App\Core\Domain\Veiculos\UseCases
  */
 abstract class BaseUseCase
 {
