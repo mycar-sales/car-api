@@ -183,7 +183,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         VeiculoRepositoyProvider::class,
-
+        \App\Providers\MessagePublishProvider::class,
         /*
          * Package Service Providers...
          */
