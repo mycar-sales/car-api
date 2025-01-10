@@ -24,9 +24,8 @@ abstract class BaseEntity
             if (!$property->isPublic() || !property_exists($this, $property->getName())) {
                 continue;
             }
-
-            //NOSONAR
-            $value = $property->getValue($this);
+            
+            $value = $property->getValue($this); //NOSONAR
 
             if (is_object($value)) {
                 $array[$property->getName()] = method_exists($value, '__toString') ? (string)$value : null;
