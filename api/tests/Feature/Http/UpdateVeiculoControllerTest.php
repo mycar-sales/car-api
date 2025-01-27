@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Http\Controllers;
+namespace Tests\Feature\Http;
 
 use App\Core\Domain\Veiculos\UseCases\UpdateVeiculoUseCase;
 use App\Http\Controllers\UpdateVeiculoController;

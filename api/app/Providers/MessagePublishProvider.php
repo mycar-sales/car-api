@@ -37,8 +37,12 @@ class MessagePublishProvider extends ServiceProvider
         );
     }
 
-    private function createRabbitMQPublisher(): RabbitMQPublisher
+    private function createRabbitMQPublisher(): ?RabbitMQPublisher
     {
+        if (app()->runningInConsole() && !app()->runningUnitTests()) {
+            return null;
+        }
+        
         $config = config('messaging.rabbitmq');
 
         $connection = new AMQPStreamConnection(

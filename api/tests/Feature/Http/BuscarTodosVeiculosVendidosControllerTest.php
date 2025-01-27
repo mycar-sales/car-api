@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Http\Controllers;
+namespace Tests\Feature\Http;
 
 use App\Core\Domain\Veiculos\UseCases\BuscarTodosVeiculosVendidosUseCase;
 use App\Http\Controllers\BuscarTodosVeiculosVendidosController;

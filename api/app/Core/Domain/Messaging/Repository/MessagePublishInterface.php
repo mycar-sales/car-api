@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Domain\Messaging\Repository;
 
+use App\Core\Domain\Messaging\ValueObjects\MessageOptions;
+
 /**
  * Interface MessagePublishInterface
  * @package App\Core\Domain\Enum\Repository
@@ -11,10 +13,9 @@ namespace App\Core\Domain\Messaging\Repository;
 interface MessagePublishInterface
 {
     /**
-     * @param string $topic
      * @param string $message
-     * @param array $options
+     * @param MessageOptions|array $options
      * @return void
      */
-    public function publish(string $topic, string $message, array $options = []): void;
+    public function publish(string $message, MessageOptions|array $options = []): void;
 }

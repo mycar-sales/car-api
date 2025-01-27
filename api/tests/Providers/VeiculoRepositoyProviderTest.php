@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Providers;
+namespace Tests\Providers;
 
 use App\Core\Domain\Veiculos\Repositories\VeiculoRepositoryInterface;
 use App\Infrastructure\Persistence\VeiculoRepository;

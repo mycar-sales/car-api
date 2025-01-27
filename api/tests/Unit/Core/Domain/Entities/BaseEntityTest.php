@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Core\Domain\Entities;
+
 use Tests\TestCase;
 use App\Core\Domain\Veiculos\Entities\BaseEntity;
 
