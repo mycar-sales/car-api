@@ -31,7 +31,8 @@ class MessagePublishProvider extends ServiceProvider
                     'rabbitmq' => $this->createRabbitMQPublisher(),
                     'kafka' => $this->createKafkaPublisher(),
                     'sqs' => $this->createSQSPublisher(),
-                    default => throw new RuntimeException("Unsupported messaging driver: {$driver}"),
+                    default => app()->runningInConsole() && !app()->runningUnitTests() ? null
+                        : throw new RuntimeException("Unsupported messaging driver: {$driver}"),
                 };
             }
         );
@@ -39,10 +40,6 @@ class MessagePublishProvider extends ServiceProvider
 
     private function createRabbitMQPublisher(): ?RabbitMQPublisher
     {
-        if (app()->runningInConsole() && !app()->runningUnitTests()) {
-            return null;
-        }
-        
         $config = config('messaging.rabbitmq');
 
         $connection = new AMQPStreamConnection(

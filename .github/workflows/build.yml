@@ -24,6 +24,8 @@ jobs:
           coverage: xdebug
 
       - name: Install dependencies
+        env:
+          MESSAGING_DRIVER: ${{ secrets.MESSAGING_DRIVER }}
         run: composer install --prefer-dist --no-progress
         working-directory: ./api
 
@@ -61,6 +63,8 @@ jobs:
           php-version: '8.0'
 
       - name: Install dependencies
+        env:
+          MESSAGING_DRIVER: ${{ secrets.MESSAGING_DRIVER }}
         run: composer install --prefer-dist --no-progress
         working-directory: ./api
 

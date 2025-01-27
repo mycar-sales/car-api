@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Messaging\Service;
 
+use App\Core\Domain\Messaging\ValueObjects\MessageOptions;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use App\Core\Domain\Messaging\Repository\MessagePublishInterface;
+use PhpAmqpLib\Wire\AMQPTable;
 
 /**
  * Class RabbitMQPublisher
@@ -22,35 +24,67 @@ class RabbitMQPublisher implements MessagePublishInterface
     {
     }
 
-    /**
-     * @param string $exchangeName
-     * @param string $message
-     * @param array $headers
-     * @return void
-     */
-    public function publish(string $exchangeName, string $message, array $headers = []): void
+    public function publish(string $message, MessageOptions|array $options = []): void
     {
+        $messageOptions = $options instanceof MessageOptions
+            ? $options
+            : new MessageOptions();
+
         $channel = $this->createChannel();
 
-        $channel->exchange_declare($exchangeName, 'fanout', false, true, false);
+        $this->declareExchange(
+            $channel,
+            $messageOptions->getExchangeName(),
+            $messageOptions->getExchangeType()
+        );
 
-        // Declara a exchange (direct)
-        $channel->exchange_declare($exchangeName, 'fanout', false, true, false);
+        if ($messageOptions->getRoutingKey()) {
+            $this->declareAndBindQueue(
+                $channel,
+                $messageOptions->getExchangeName(),
+                $messageOptions->getRoutingKey()
+            );
+        }
 
-        // Declara a fila (opcional, mas recomendado)
-        $queueName = "order-created"; // A fila terá o mesmo nome da routing key
-        $channel->queue_declare($queueName, false, true, false, false);
-
-        // Vincula a fila à exchange
-        $channel->queue_bind($queueName, $exchangeName, $queueName);
-
-        // Cria a mensagem
-        $msg = new AMQPMessage($message, ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT]);
-
-        // Publica na exchange
-        $channel->basic_publish($msg, $exchangeName, $queueName);
+        $this->publishMessage(
+            $channel,
+            $message,
+            $messageOptions->getExchangeName(),
+            $messageOptions->getRoutingKey(),
+            $messageOptions->getHeaders()
+        );
 
         $this->closeChannel($channel);
+    }
+    private function declareExchange($channel, string $exchangeName, string $exchangeType): void
+    {
+        $channel->exchange_declare($exchangeName, $exchangeType, false, true, false);
+    }
+
+    private function declareAndBindQueue($channel, string $exchangeName, string $routingKey): void
+    {
+        $channel->queue_declare($routingKey, false, true, false, false);
+        $channel->queue_bind($routingKey, $exchangeName, $routingKey);
+    }
+
+    private function publishMessage(
+        $channel,
+        string $message,
+        string $exchangeName,
+        string $routingKey,
+        array $headers
+    ): void {
+        $properties = [
+            'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT,
+        ];
+
+        if (!empty($headers)) {
+            $properties['application_headers'] = new AMQPTable($headers);
+        }
+
+        $msg = new AMQPMessage($message, $properties);
+
+        $channel->basic_publish($msg, $exchangeName, $routingKey);
     }
 
     /**

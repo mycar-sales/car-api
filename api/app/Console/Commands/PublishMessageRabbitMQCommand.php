@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Core\Domain\Messaging\UseCases\PublishMessageUseCase;
+use App\Core\Domain\Messaging\ValueObjects\MessageOptions;
 use Illuminate\Console\Command;
 
 class PublishMessageRabbitMQCommand extends Command
@@ -26,7 +27,15 @@ class PublishMessageRabbitMQCommand extends Command
         $routingKey = $this->argument('routingKey');
         $message = $this->argument('message');
 
-        $this->useCase->execute($exchangeName, $routingKey, $message);
+        $messageOptions = new MessageOptions(
+            exchangeName: $exchangeName,
+            routingKey: $routingKey,
+            exchangeType: 'fanout',
+            headers: ['priority' => 1]
+        );
+
+
+        $this->useCase->execute($message, $messageOptions);
 
         $this->info("Message published to exchange '{$exchangeName}' with routing key '{$routingKey}': {$message}");
     }
